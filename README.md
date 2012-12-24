@@ -31,7 +31,7 @@ Also, this is a work in progress and was tested only in Mac OS X. Contributions 
 1. The `run` script adds the java7 JRE to the path, and runs the play2 generated `start` script.
 
 ## Thanks
-* mchv's play2 on dotcloud project (https://github.com/mchv/play2-on-dotcloud) (check it out for another approach to this).
+* Mariot Chauvin's play2 on dotcloud project (https://github.com/mchv/play2-on-dotcloud) (check it out for another approach to this).
 * DotCloud support team
 
 ## Team
