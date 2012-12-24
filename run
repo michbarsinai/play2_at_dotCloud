@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo Running play2 app.
+echo To change JAVA_OPTIONS, edit the "run" script.
+
+APPLICATION_DIR=play2app
+LOG_FILENAME=play2app.log
+
+MAX_HEAP_SIZE=128M
+PERM_SIZE=64M
+MAX_PERM_SIZE=128M
+
+export JAVA_OPTIONS="-Xmx${MAX_HEAP_SIZE} -XX:PermSize=${PERM_SIZE} -XX:MaxPermSize=${MAX_PERM_SIZE}"
+echo "JAVA_OPTIONS=$JAVA_OPTIONS"
+
+export PATH="$(pwd)/java7:$PATH"
+echo "Using java: $(which java)"
+java -version
+
+cd ~/$APPLICATION_DIR
+exec ./start -Dhttp.port=$PORT_WWW &>> /var/log/supervisor/$LOG_FILENAME

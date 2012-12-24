@@ -1,0 +1,7 @@
+play2:
+  type: custom
+  buildscript: builder
+  ports:
+    www: http
+  process: ~/run
+

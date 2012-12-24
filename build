@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# This file creates the dist package, and puts it in the dotcloud-deploy folder.
+# Run this script from the play app folder.
+set -e
+
+DOTCLOUD_SERVICE_ROOT=play2_at_dotcloud
+APPFOLDER_NAME=appfolder
+
+echo Creating new dist folder
+
+if [[ -d $DOTCLOUD_SERVICE_ROOT/$APPFOLDER_NAME ]]; then
+    rm -rf $DOTCLOUD_SERVICE_ROOT/$APPFOLDER_NAME
+fi
+
+mkdir $DOTCLOUD_SERVICE_ROOT/$APPFOLDER_NAME
+
+echo Running play dist
+play dist
+PACKAGE=$(ls dist)
+
+echo Copying dist package to deploy directory
+cp dist/$PACKAGE $DOTCLOUD_SERVICE_ROOT/$APPFOLDER_NAME/play2-app.zip
+
+echo Pushing to dotcloud
+LAST_DIR="$(pwd)"
+cd $DOTCLOUD_SERVICE_ROOT
+dotcloud push --rsync
+
+cd "$LAST_DIR"
